@@ -1,0 +1,48 @@
+*{
+    padding:0px;
+    margin: 0px;
+}
+
+body{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clock{
+    background:url('png-transparent-clock-face-measu.png');
+    height:400px;
+    width:400px;
+    background-size: cover;
+    background-position: center;
+    margin-top: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.hands{
+    background:#000;
+    position:absolute;
+    top: 50%;
+    transform-origin: 0% 0%;
+    border-radius: 0px 0px 1px 1px;
+}
+
+#seconds{
+    height:170px;
+    width:4px;
+    transform: rotate(180);
+}
+
+#minutes{
+    height:140px;
+    width:6px;
+    transform: rotate(180);
+}
+
+#hour{
+    height:120px;
+    width:6px;
+    transform: rotate(180);
+}
