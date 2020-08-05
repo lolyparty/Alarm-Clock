@@ -26,23 +26,35 @@ body{
     position:absolute;
     top: 50%;
     transform-origin: 0% 0%;
-    border-radius: 0px 0px 1px 1px;
+    border-radius: 0px 0px 10px 10px;
 }
 
 #seconds{
-    height:170px;
+    height:115px;
     width:4px;
     transform: rotate(180);
+    top: 50%;
 }
 
 #minutes{
-    height:140px;
+    height:175px;
     width:6px;
     transform: rotate(180);
 }
 
 #hour{
-    height:120px;
+    height:135px;
     width:6px;
     transform: rotate(180);
+}
+
+.clock:before{
+    content:'';
+    height: 18px;
+    width:18px;
+    position: absolute;
+    background: #000;
+    border-radius:50%;
+    top:47%;
+    left:47.7%;
 }
