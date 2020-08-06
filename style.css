@@ -25,7 +25,7 @@ body{
     background:#000;
     position:absolute;
     top: 50%;
-    transform-origin: 0% 0%;
+    transform-origin: 50% 0%;
     border-radius: 0px 0px 10px 10px;
 }
 
@@ -50,11 +50,11 @@ body{
 
 .clock:before{
     content:'';
-    height: 18px;
-    width:18px;
+    height: 16px;
+    width:16px;
     position: absolute;
     background: #000;
     border-radius:50%;
     top:47%;
-    left:47.7%;
+    left:48%;
 }
