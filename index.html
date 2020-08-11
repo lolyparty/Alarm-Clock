@@ -8,13 +8,66 @@
 </head>
 <body>
 
-    <div class="clock">
-        <div class="hands" id="seconds"></div>
-        <div class="hands" id="minutes"></div>
-        <div class="hands" id="hour"></div>
+    <audio src="Alarm-ringtone.mp3"></audio>
+    <div class="container">
+        <div class="clock_container">
+            <div class="clock">
+                <div class="hands" id="seconds"></div>
+                <div class="hands" id="minutes"></div>
+                <div class="hands" id="hour"></div>
+            </div>
+        </div>
+        
+    
+        <div class="right">
+            <div class="toggle">
+                <div class="datediv">
+                    <h1 class="date"></h1>
+                </div>
+    
+                <div class="alarm">
+                    <h1>Alarm</h1>
+                    <div class="addalarm"><img src="icons8-plus (1).svg" alt="add new alarm"></div>
+                    <div class="modal alarmmodal">
+                        <form action="">
+                            <input type="number" class="hourinput"> :
+                            <input type="number" class="minuteinput">
+                            <br>
+                            <button class="btn">Set alarm</button>
+                        </form>
+                    </div>
+                    <div class="alarmspan"></div>
+                </div>
+    
+                
+                <div class="timer">
+                    <h1>Set timer</h1>
+                    <div class="addtimer"><img src="icons8-plus (1).svg" alt="add new timer"></div>
+                    <div class="modal timermodal">
+                        <form>
+                            <input type="number" class="hourTime"> :
+                        <input type="number" class="minuteTime">
+                        <br>
+                        <button class="timerbtn">Set timer</button>
+                        </form>
+                    </div>
+                    
+                    <br>
+                    <div class="timerspan"></div>
+                </div>
+            </div>
+    
+            <div class="tabtoggler">
+                <div class="clocktoggler"><h2>Clock</h2></div>
+                <div class="alarmtoggler"><h2>Alarm</h2></div>
+                <div class="timertoggler"><h2>Timer</h2></div>
+            </div>
+        </div>
     </div>
     
-    <audio src="Alarm-ringtone.mp3"></audio>
+    
+
+    
 
     <script src="app.js"></script>
 </body>
