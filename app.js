@@ -3,7 +3,7 @@ var secondsHand = document.querySelector('#seconds');
 var hourhand = document.querySelector('#hour');
 var hourInput = document.querySelector('.hourinput');
 var minuteInput = document.querySelector('.minuteinput');
-var btn = document.querySelector('.btn');
+var btn = document.querySelector('.alarmbtn');
 var alarmAudio = document.querySelector('audio');
 var currentDate = document.querySelector('.date');
 var timedMinute = document.querySelector('.minuteTime')
@@ -19,6 +19,7 @@ var alarmModal = document.querySelector('.alarmmodal');
 var timerModal = document.querySelector('.timermodal')
 var addAlarm = document.querySelector('.addalarm')
 var addTimer = document.querySelector('.addtimer')
+var alarmUI = document.querySelector('.alarmspan')
 
 var userDate = function(){
 
@@ -63,8 +64,24 @@ var time = function (){
     var getHour;
     var getSecond;
     var getMinute;
+    var AlarmOn = false;
+    
+
+    btn.addEventListener('click',()=>{
+        var html = '<div class="alarmspan">$alarmHour:$alarmMinute<span class="delete close" type="button">&times;</span></div>';
+        html = html.replace('$alarmHour', hourInput.value)
+        newhtml = html.replace('$alarmMinute', minuteInput.value)
+        AlarmDiv.insertAdjacentHTML('beforeend',newhtml)
+    })
+   
 
     setInterval(()=>{
+
+        if(AlarmOn){
+        addAlarm.style.display = 'none';
+    }else{
+        addAlarm.style.display = 'block';
+    }
         var getTime = new Date();
         
     // Clock
@@ -85,17 +102,24 @@ var time = function (){
             alarmMinute = parseInt(minuteInput.value);
             console.log(alarmHour, alarmMinute, getHour, getMinute)
             alarmModal.classList.remove('animate')
+            AlarmOn = true;
         }
         btn.addEventListener('click',Alarm)
         if(alarmHour === getHour & alarmMinute === getMinute){
             alarmAudio.play();
             alarmAudio.loop = true;
             console.log('same')
+            
         }
-        if(alarmMinute + 3 === getMinute){
+        if(alarmMinute + 1 === getMinute){
             alarmAudio.pause()
+            AlarmOn = false;
         }
+        
     }, 1000)
+
+    // console.log(alarmUI.parentNode)
+    
 }
 
 time()
@@ -103,41 +127,55 @@ time()
 
 //Timer
 var countDwn = function(){
+    var timerOn = false;
     timerBtn.addEventListener('click',(e)=>{
         e.preventDefault()
         timerModal.classList.toggle('animate')
-        let countHour = parseInt(timedHour.value);
-        let countMinute = parseInt(timedMinute.value);
+        
+        var countHour = parseInt(timedHour.value);
+        var countMinute = parseInt(timedMinute.value);
             countMinute = countMinute + (countHour * 60)
-        let countSeconds = countMinute * 60;
+        var countSeconds = countMinute * 60;
         
-        // console.log(countMinute)
-        setInterval(()=>{
-
-            var minuteLeft = Math.floor(countSeconds / 60);
-            var minuteDisplay = Math.floor(minuteLeft % 60)
-            var hourLeft = Math.floor(minuteLeft / 60)
-               minuteDisplay < 10 ? minuteDisplay = '0' + minuteDisplay: minuteDisplay;
         
-                var secondsLeft = countSeconds % 60;
-                secondsLeft < 10 ? secondsLeft = '0' + secondsLeft: secondsLeft;
-
-                hourLeft < 10 ? hourLeft = '0' + hourLeft: hourLeft;
-            
-                countSeconds--;
-                if(countSeconds < 0){
-                    countSeconds = 0;
+        // if((countHour !== isNaN) & (countMinute !== isNaN) & (countMinute !== '') & (countMinute !== ''))
+            setInterval(()=>{
+                if(timerOn){
+                    addTimer.style.display = 'none';
+                }else{
+                    addTimer.style.display = 'block';
                 }
+                timerOn = true;
+                var minuteLeft = Math.floor(countSeconds / 60);
+                var minuteDisplay = Math.floor(minuteLeft % 60)
+                var hourLeft = Math.floor(minuteLeft / 60)
+                   minuteDisplay < 10 ? minuteDisplay = '0' + minuteDisplay: minuteDisplay;
             
-                var timer = hourLeft + ':' + minuteDisplay + ':' + secondsLeft
-                // console.log(timer);
+                    var secondsLeft = countSeconds % 60;
+                    secondsLeft < 10 ? secondsLeft = '0' + secondsLeft: secondsLeft;
+    
+                    hourLeft < 10 ? hourLeft = '0' + hourLeft: hourLeft;
+                
+                    countSeconds--;
+                    if(countSeconds < 0){
+                        countSeconds = 0;
+                        timerOn = false;
+                    }
+                
+                    var timer = hourLeft + ':' + minuteDisplay + ':' + secondsLeft
+                    console.log(timer);
+                
+                    document.querySelector('.timerspan').textContent = timer;
+                   
+            }, 1000)
+        // }
             
-                document.querySelector('.timerspan').textContent = timer;
-        }, 1000)
     })
 }
-
 countDwn();
+
+
+
     
 clockToggler.addEventListener('click',()=>{
     dateDiv.style.display = 'block';
@@ -166,36 +204,3 @@ addTimer.addEventListener('click',()=>{
     timerModal.classList.toggle('animate')
 });
 
-
-
-
-
-// var allButtons = document.querySelectorAll( '.addalarm' + ','+ '.addtimer');
-// allButtons.forEach((cur)=>{
-//     cur.addEventListener('click',()=>{
-//         timerModal.classList.remove('animate');
-//         alarmModal.classList.remove('animate');
-//     })
-// })
-
-
-
-// clockToggler.addEventListener('click',()=>{
-//     dateDiv.classList.add('active') 
-//     AlarmDiv.classList.remove('active') 
-//     timerDiv.classList.remove('active') 
-// })
-
-// alarmToggler.addEventListener('click',()=>{
-//     AlarmDiv.classList.add('active') 
-//     dateDiv.classList.remove('active') 
-//     timerDiv.classList.remove('active') 
-// })
-
-// timerToggler.addEventListener('click',()=>{
-//     timerDiv.classList.add('active') 
-//     dateDiv.classList.remove('active') 
-//     AlarmDiv.classList.remove('active') 
-// })
-
-// toggleMode();
